@@ -30,10 +30,36 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 # object detection tools and helper functions
 import misc.objdet_tools as tools
 
+def calculate_iou(gt_bbox, pred_bbox):
+    x11,y11,x12,y12 = gt_bbox
+    x21,y21,x22,y22 = pred_bbox
+    print('x11 = {}, y11 = {}, x12 = {}, y12 = {}'.format(x11,y11,x12,y12))
+    print('x21 = {}, y21 = {}, x22 = {}, y22 = {}'.format(x21,y21,x22,y22))
+
+    area_of_box1 = abs((x12-x11)*(y12-y11))
+    area_of_box2 = abs((x22-x21)*(y22-y21))
+
+    x_diff,y_diff = 0,0
+    if x11 <= x21 <= x12 or x11 <= x22 <= x12 or x21 <= x11 <= x22 or x21 <= x12 <= x22:
+        x_diff = min(x12,x22)-max(x11,x21)
+
+    if y11 <= y21 <= y12 or y11 <= y22 <= y12 or y21 <= y11 <= y22 or y21 <= y12 <= y22:
+        y_diff = min(y12,y22)-max(y11,y21)
+
+    intersect = x_diff * y_diff
+    print('x_diff = {}'.format(x_diff))
+    print('y_diff = {}'.format(y_diff))
+    print('intersect = {}'.format(intersect))
+    print('area_of_box1 = {}'.format(area_of_box1))
+    print('area_of_box2 = {}'.format(area_of_box2))
+    iou = intersect / (area_of_box1 + area_of_box2 - intersect)
+    print('iou = ', iou)
+    return iou
+
 
 # compute various performance measures to assess object detection
 def measure_detection_performance(detections, labels, labels_valid, min_iou=0.5):
-    
+
      # find best detection for each valid label 
     true_positives = 0 # no. of correctly detected objects
     center_devs = []
@@ -49,17 +75,39 @@ def measure_detection_performance(detections, labels, labels_valid, min_iou=0.5)
             print("student task ID_S4_EX1 ")
 
             ## step 1 : extract the four corners of the current label bounding-box
-            
+            gt_fl = (label.box.center_x - 0.5 * label.box.length, label.box.center_y - 0.5 * label.box.width)
+            # gt_rl = (label.box.center_x - 0.5 * label.box.length, label.box.center_y + 0.5 * label.box.width)
+            gt_rr = (label.box.center_x + 0.5 * label.box.length, label.box.center_y + 0.5 * label.box.width)
+            # gt_rf = (label.box.center_x + 0.5 * label.box.length, label.box.center_y - 0.5 * label.box.width)
+
+            gt_bbox = (max(0,gt_fl[0]), max(0,gt_fl[1]), max(0,gt_rr[0]), max(0,gt_rr[1]))
+            gt_center = (label.box.center_x, label.box.center_y)
+
             ## step 2 : loop over all detected objects
+            for det in detections:
 
                 ## step 3 : extract the four corners of the current detection
-                
+                _, x, y, _, _, w, l, yaw = det
+                fl, rl, rr, rf = tools.compute_box_corners(x,y,w,l,yaw)
+
+                min_x = max(0,min(fl[0], rl[0], rr[0], rf[0]))
+                min_y = max(0,min(fl[1], rl[1], rr[1], rf[1]))
+                max_x = max(0,max(fl[0], rl[0], rr[0], rf[0]))
+                max_y = max(0,max(fl[1], rl[1], rr[1], rf[1]))
+
+                pred_bbox = (min_x, min_y, max_x, max_y)
+                pred_center = (fl[0] + 0.5*(rr[0]-fl[0]), fl[1] + 0.5*(rr[1]-fl[1]))
                 ## step 4 : computer the center distance between label and detection bounding-box in x, y, and z
-                
+                dist_x = abs(gt_center[0] - pred_center[0])
+                dist_y = abs(gt_center[1] - pred_center[1])
+                dist_z = 0
                 ## step 5 : compute the intersection over union (IOU) between label and detection bounding-box
-                
+                iou = calculate_iou(gt_bbox, pred_bbox)
+
                 ## step 6 : if IOU exceeds min_iou threshold, store [iou,dist_x, dist_y, dist_z] in matches_lab_det and increase the TP count
-                
+                if iou > min_iou:
+                    matches_lab_det.append([iou, dist_x, dist_y, dist_z])
+                    true_positives += 1
             #######
             ####### ID_S4_EX1 END #######     
             
@@ -77,13 +125,13 @@ def measure_detection_performance(detections, labels, labels_valid, min_iou=0.5)
     # compute positives and negatives for precision/recall
     
     ## step 1 : compute the total number of positives present in the scene
-    all_positives = 0
+    all_positives = len(detections)
 
-    ## step 2 : compute the number of false negatives
-    false_negatives = 0
+    ## step 2 : compute the number of false negatives (true negative??)
+    false_negatives = len(labels) - true_positives
 
     ## step 3 : compute the number of false positives
-    false_positives = 0
+    false_positives = all_positives - true_positives
     
     #######
     ####### ID_S4_EX2 END #######     
@@ -110,13 +158,27 @@ def compute_performance_stats(det_performance_all):
     #######    
     print('student task ID_S4_EX3')
 
+    # pos_negs = [all_positives, true_positives, false_negatives, false_positives]
+    # det_performance = [ious, center_devs, pos_negs]
+
     ## step 1 : extract the total number of positives, true positives, false negatives and false positives
-    
+    total_all_positive = 0
+    total_true_positive = 0
+    total_false_negative = 0
+    total_false_positive = 0
+
+    for pos_neg in pos_negs:
+        all_positive, true_positive, false_negative, false_positive = pos_neg
+        total_all_positive += all_positive
+        total_true_positive += true_positive
+        total_false_negative += false_negative
+        total_false_positive += false_positive
+
     ## step 2 : compute precision
-    precision = 0.0
+    precision = total_true_positive / total_all_positive
 
     ## step 3 : compute recall 
-    recall = 0.0
+    recall = total_true_positive / total_true_positive + total_false_negative
 
     #######    
     ####### ID_S4_EX3 END #######     

@@ -56,6 +56,7 @@ def load_configs_model(model_name='darknet', configs=None):
         configs.num_workers = 4
         configs.pin_memory = True
         configs.use_giou_loss = False
+        configs.min_iou = 0.5
 
     elif model_name == 'fpn_resnet':
         ####### ID_S3_EX1-3 START #######     
@@ -106,6 +107,7 @@ def load_configs_model(model_name='darknet', configs=None):
             'dim': configs.num_dim
         }
         configs.num_input_features = 4
+        configs.min_iou = 0.5
 
         #######
         ####### ID_S3_EX1-3 END #######     
@@ -184,7 +186,7 @@ def create_model(configs):
 
 # detect trained objects in birds-eye view
 def detect_objects(input_bev_maps, model, configs):
-
+    VEHICLE_LABEL = 1
     # deactivate autograd engine during test to reduce memory usage and speed up computations
     with torch.no_grad():  
 
@@ -217,7 +219,7 @@ def detect_objects(input_bev_maps, model, configs):
             detections = detections.cpu().numpy().astype(np.float32)
             #detections = post_processing(detections, configs.num_classes, configs.down_ratio, configs.peak_thresh)
             detections = post_processing(detections, configs)
-            detections = detections[0]  # only first batch
+            detections = detections[0][VEHICLE_LABEL]  # only first batch
             #######
             ####### ID_S3_EX1-5 END #######     
 
@@ -229,16 +231,15 @@ def detect_objects(input_bev_maps, model, configs):
     print("student task ID_S3_EX2")
     objects = [] 
 
-    VEHICLE_LABEL = 1
     ## step 1 : check whether there are any detections
-    if len(detections[VEHICLE_LABEL]) > 0:
+    if len(detections) > 0:
         ## step 2 : loop over all detections
-        for det in detections[VEHICLE_LABEL]:
+        for det in detections:
             ## step 3 : perform the conversion using the limits for x, y and z set in the configs structure
             _, x, y, z, h, w, l, yaw = det
             ## step 4 : append the current object to the 'objects' array
             objects.append([VEHICLE_LABEL, x, y, z, h, w, l, yaw])
-        
+
     #######
     ####### ID_S3_EX2 START #######   
     
