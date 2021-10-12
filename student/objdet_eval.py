@@ -30,33 +30,6 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 # object detection tools and helper functions
 import misc.objdet_tools as tools
 
-def calculate_iou(gt_bbox, pred_bbox):
-    x11,y11,x12,y12 = gt_bbox
-    x21,y21,x22,y22 = pred_bbox
-    print('x11 = {}, y11 = {}, x12 = {}, y12 = {}'.format(x11,y11,x12,y12))
-    print('x21 = {}, y21 = {}, x22 = {}, y22 = {}'.format(x21,y21,x22,y22))
-
-    area_of_box1 = abs((x12-x11)*(y12-y11))
-    area_of_box2 = abs((x22-x21)*(y22-y21))
-
-    x_diff,y_diff = 0,0
-    if x11 <= x21 <= x12 or x11 <= x22 <= x12 or x21 <= x11 <= x22 or x21 <= x12 <= x22:
-        x_diff = min(x12,x22)-max(x11,x21)
-
-    if y11 <= y21 <= y12 or y11 <= y22 <= y12 or y21 <= y11 <= y22 or y21 <= y12 <= y22:
-        y_diff = min(y12,y22)-max(y11,y21)
-
-    intersect = x_diff * y_diff
-    print('x_diff = {}'.format(x_diff))
-    print('y_diff = {}'.format(y_diff))
-    print('intersect = {}'.format(intersect))
-    print('area_of_box1 = {}'.format(area_of_box1))
-    print('area_of_box2 = {}'.format(area_of_box2))
-    iou = intersect / (area_of_box1 + area_of_box2 - intersect)
-    print('iou = ', iou)
-    return iou
-
-
 # compute various performance measures to assess object detection
 def measure_detection_performance(detections, labels, labels_valid, min_iou=0.5):
 
@@ -75,39 +48,34 @@ def measure_detection_performance(detections, labels, labels_valid, min_iou=0.5)
             print("student task ID_S4_EX1 ")
 
             ## step 1 : extract the four corners of the current label bounding-box
-            gt_fl = (label.box.center_x - 0.5 * label.box.length, label.box.center_y - 0.5 * label.box.width)
-            # gt_rl = (label.box.center_x - 0.5 * label.box.length, label.box.center_y + 0.5 * label.box.width)
-            gt_rr = (label.box.center_x + 0.5 * label.box.length, label.box.center_y + 0.5 * label.box.width)
-            # gt_rf = (label.box.center_x + 0.5 * label.box.length, label.box.center_y - 0.5 * label.box.width)
-
-            gt_bbox = (max(0,gt_fl[0]), max(0,gt_fl[1]), max(0,gt_rr[0]), max(0,gt_rr[1]))
-            gt_center = (label.box.center_x, label.box.center_y)
+            gt_corners = tools.compute_box_corners(label.box.center_x, label.box.center_y, label.box.width, label.box.length, label.box.heading)
+            gt_poly = Polygon(gt_corners)
 
             ## step 2 : loop over all detected objects
             for det in detections:
 
                 ## step 3 : extract the four corners of the current detection
-                _, x, y, _, _, w, l, yaw = det
-                fl, rl, rr, rf = tools.compute_box_corners(x,y,w,l,yaw)
+                _, x, y, z, _, w, l, yaw = det
+                pred_corners = tools.compute_box_corners(x,y,w,l,yaw)
+                pred_poly = Polygon(pred_corners)
 
-                min_x = max(0,min(fl[0], rl[0], rr[0], rf[0]))
-                min_y = max(0,min(fl[1], rl[1], rr[1], rf[1]))
-                max_x = max(0,max(fl[0], rl[0], rr[0], rf[0]))
-                max_y = max(0,max(fl[1], rl[1], rr[1], rf[1]))
-
-                pred_bbox = (min_x, min_y, max_x, max_y)
-                pred_center = (fl[0] + 0.5*(rr[0]-fl[0]), fl[1] + 0.5*(rr[1]-fl[1]))
                 ## step 4 : computer the center distance between label and detection bounding-box in x, y, and z
-                dist_x = abs(gt_center[0] - pred_center[0])
-                dist_y = abs(gt_center[1] - pred_center[1])
-                dist_z = 0
+                dist_x = abs(label.box.center_x - x)
+                dist_y = abs(label.box.center_y - y)
+                dist_z = abs(label.box.center_z - z)
+
                 ## step 5 : compute the intersection over union (IOU) between label and detection bounding-box
-                iou = calculate_iou(gt_bbox, pred_bbox)
+                # iou = calculate_iou(gt_bbox, pred_bbox)
+                intersection = gt_poly.intersection(pred_poly)
+                union = gt_poly.union(pred_poly)
+                iou = intersection.area / union.area
+                print('iou = {}'.format(iou))
 
                 ## step 6 : if IOU exceeds min_iou threshold, store [iou,dist_x, dist_y, dist_z] in matches_lab_det and increase the TP count
                 if iou > min_iou:
                     matches_lab_det.append([iou, dist_x, dist_y, dist_z])
                     true_positives += 1
+                    print('iou = {}, TF = {}'.format(iou, true_positives))
             #######
             ####### ID_S4_EX1 END #######     
             
