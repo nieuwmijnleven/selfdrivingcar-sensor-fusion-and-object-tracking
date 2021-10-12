@@ -60,8 +60,8 @@ def measure_detection_performance(detections, labels, labels_valid, min_iou=0.5)
                 pred_poly = Polygon(pred_corners)
 
                 ## step 4 : computer the center distance between label and detection bounding-box in x, y, and z
-                dist_x = abs(label.box.center_x - x)
-                dist_y = abs(label.box.center_y - y)
+                dist_x = abs(label.box.center_x - x.item())
+                dist_y = abs(label.box.center_y - y.item())
                 dist_z = abs(label.box.center_z - z)
 
                 ## step 5 : compute the intersection over union (IOU) between label and detection bounding-box
@@ -81,7 +81,7 @@ def measure_detection_performance(detections, labels, labels_valid, min_iou=0.5)
             
         # find best match and compute metrics
         if matches_lab_det:
-            best_match = max(matches_lab_det,key=itemgetter(1)) # retrieve entry with max iou in case of multiple candidates   
+            best_match = max(matches_lab_det,key=itemgetter(1)) # retrieve entry with max iou in case of multiple candidates
             ious.append(best_match[0])
             center_devs.append(best_match[1:])
 
@@ -146,7 +146,7 @@ def compute_performance_stats(det_performance_all):
     precision = total_true_positive / total_all_positive
 
     ## step 3 : compute recall 
-    recall = total_true_positive / total_true_positive + total_false_negative
+    recall = total_true_positive / (total_true_positive + total_false_negative)
 
     #######    
     ####### ID_S4_EX3 END #######     
