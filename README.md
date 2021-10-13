@@ -18,9 +18,13 @@ $> python loop_over_dataset_ID_S1_EX2.py
 <img src = "img/report/ID_S1_EX2_DETAIL.png?raw=true" width=700 />
 
 * Lidar is located in the lower right of the image
-* The more close the cars is are the Lidar sensor, The higher the resolution of the cars have
+* The closer the cars are to the Lidar sensor, The higher the resolution of the cars are
   * The car 1, 2, 5 and 6 which are close to the Lidar sensor are represented as high resolution images
-  * However, The car 7, 8, and 9 which are far away from the Lidar sensor are represented as low resolution images      
+    * we can see the cars as rectagles
+    * we can recognize the front mirrors of the cars 
+  * However, The car 7, 8, and 9 which are far away from the Lidar sensor are represented as low resolution images 
+    * we cannot see the cars as rectagles
+  * Moreover, The car 3 and 4 are     
 
 ## ID_S2
 ```
