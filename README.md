@@ -1,4 +1,4 @@
-# Project Reports
+# Mid-Term Project: 3D Object Detection
 
 ## ID_S1_EX1
 ```
