@@ -238,15 +238,13 @@ def detect_objects(input_bev_maps, model, configs):
             ## step 3 : perform the conversion using the limits for x, y and z set in the configs structure
             _, _x, _y, _z, _h, _w, _l, _yaw = det
 
-            bev_discret_y = (configs.lim_y[1] - configs.lim_y[0]) / configs.bev_width
-            bev_discret_x = (configs.lim_x[1] - configs.lim_x[0]) / configs.bev_height
-
-            x = _y * bev_discret_x
-            y = _x * bev_discret_y - 0.5 * (configs.lim_y[1] - configs.lim_y[0])
-            z = _z
+            bev_discret = (configs.lim_x[1] - configs.lim_x[0]) / configs.bev_height
+            x = _y * bev_discret
+            y = (_x - 0.5 * (configs.bev_width+1)) * bev_discret
+            z = _z + configs.lim_z[0]
             h = _h
-            w = _w * bev_discret_y
-            l = _l * bev_discret_x
+            w = _w * bev_discret
+            l = _l * bev_discret
             yaw = _yaw
             
             ## step 4 : append the current object to the 'objects' array
