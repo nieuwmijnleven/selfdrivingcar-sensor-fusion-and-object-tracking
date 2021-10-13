@@ -15,8 +15,10 @@ $> python loop_over_dataset_ID_S1_EX2.py
 <img src = "img/report/ID_S1_EX2.png?raw=true" width=700 />
 
 ### Details of Overall 3D Point Cloud 
+#### Find and display 6 examples of vehicles with varying degrees of visibility in the point-cloud
 <img src = "img/report/ID_S1_EX2_DETAIL.png?raw=true" width=700 />
 
+#### Identify vehicle features that appear as a stable feature on most vehicles (e.g. rear-bumper, tail-lights) and describe them briefly
 * Lidar is located in the lower right of the image
 * The closer the cars are to the Lidar sensor, The higher the resolution of the cars are
   * The car 1, 2, 5 and 6 which are close to the Lidar sensor are represented as high resolution images
@@ -24,7 +26,7 @@ $> python loop_over_dataset_ID_S1_EX2.py
     * we can recognize the front mirrors of the cars 
   * However, The car 7, 8, and 9 which are far away from the Lidar sensor are represented as low resolution images 
     * we cannot see the cars as rectagles
-  * Moreover, The car 3 and 4 are     
+  * Moreover, some beams from the Lidar cannot reach to the car 3 and 4 as there are other cars in front of them
 
 ## ID_S2
 ```
