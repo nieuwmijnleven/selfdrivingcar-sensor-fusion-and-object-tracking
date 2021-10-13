@@ -52,6 +52,12 @@ $> python loop_over_dataset_ID_S4.py
 <img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S4-EX2.png?raw=true" width=800 />
 
 ### ID_S4-EX3
+#### (case 1) configs_det.use_labels_as_objects = False
+* precision = 0.9620689655172414, recall = 0.9117647058823529
+
+#### (case 2) configs_det.use_labels_as_objects = True
+* 
+
 
 # SDCND : Sensor Fusion and Tracking
 This is the project for the second course in the  [Udacity Self-Driving Car Engineer Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213) : Sensor Fusion and Tracking. 
