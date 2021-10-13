@@ -11,7 +11,7 @@ $> python loop_over_dataset_ID_S1_EX1.py
 ```
 $> python loop_over_dataset_ID_S1_EX2.py
 ```
-<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S1_EX2.png?raw=true" width=800 />
+<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S1_EX2.png?raw=true" width=700 />
 
 
 ## ID_S2
@@ -20,13 +20,13 @@ $> python loop_over_dataset_ID_S2.py
 ```
 
 ### ID_S2_EX1
-<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S2_EX1.png?raw=true" width=800 />
+<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S2_EX1.png?raw=true" width=700 />
 
 ### ID_S2_EX2
-<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S2_EX2.png?raw=true" width=800 />
+<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S2_EX2.png?raw=true" width=700 />
 
 ### ID_S2_EX3
-<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S2_EX3.png?raw=true" width=800 />
+<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S2_EX3.png?raw=true" width=700 />
 
 ## ID_S3
 ```
@@ -36,8 +36,8 @@ $> python loop_over_dataset_ID_S3.py
 <img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S3-EX1.png?raw=true" width=800 />
 
 ### ID_S3_EX2
-<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S3-EX2-1.png?raw=true" width=800 />
-<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S3-EX2-2.png?raw=true" width=800 />
+<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S3-EX2-1.png?raw=true" width=700 />
+<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S3-EX2-2.png?raw=true" width=700 />
 
 ## ID_S4
 ```
