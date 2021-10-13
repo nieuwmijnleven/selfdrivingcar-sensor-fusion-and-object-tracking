@@ -39,10 +39,12 @@ $> python loop_over_dataset_ID_S2.py
 <img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S3-EX2-1.png?raw=true" width=800 />
 <img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S3-EX2-2.png?raw=true" width=800 />
 
-## ID_S4-EX1
+## ID_S4_EX1
+<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S4-EX1-1.png?raw=true" width=800 />
+<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S4-EX1-2.png?raw=true" width=800 />
 
-## ID_S4-EX2
-
+## ID_S4_EX2
+<img src = "https://github.com/nieuwmijnleven/nd013-c2-fusion-starter/blob/main/img/report/ID_S4-EX2.png?raw=true" width=800 />
 
 ## ID_S4-EX3
 
