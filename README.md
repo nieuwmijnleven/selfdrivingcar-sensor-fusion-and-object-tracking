@@ -23,7 +23,7 @@ $> python loop_over_dataset_ID_S1_EX2.py
 * The closer the cars are to the Lidar sensor, The higher the resolution of the cars are
   * The car 1, 2, 5 and 6 which are close to the Lidar sensor are represented as high resolution images
     * we can see the cars as rectagles
-    * we can recognize the front mirrors of the cars 
+    * we can recognize the front glass of the cars 
   * However, The car 7, 8, and 9 which are far away from the Lidar sensor are represented as low resolution images 
     * we cannot see the cars as rectagles
   * Moreover, some beams from the Lidar cannot reach to the car 3 and 4 as there are other cars in front of them
