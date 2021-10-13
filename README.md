@@ -11,7 +11,11 @@ $> python loop_over_dataset_ID_S1_EX1.py
 ```
 $> python loop_over_dataset_ID_S1_EX2.py
 ```
+### Overall 3D Point Cloud
 <img src = "img/report/ID_S1_EX2.png?raw=true" width=700 />
+
+### A Part of Overall 3D Point Cloud 
+<img src = "img/report/ID_S1_EX2_DETAIL.png?raw=true" width=700 />
 
 
 ## ID_S2
@@ -32,6 +36,7 @@ $> python loop_over_dataset_ID_S2.py
 ```
 $> python loop_over_dataset_ID_S3.py
 ```
+
 ### ID_S3_EX1
 <img src = "img/report/ID_S3-EX1.png?raw=true" width=800 />
 
