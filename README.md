@@ -14,7 +14,7 @@ $> python loop_over_dataset_ID_S1_EX2.py
 ### Overall 3D Point Cloud
 <img src = "img/report/ID_S1_EX2.png?raw=true" width=700 />
 
-### A Part of Overall 3D Point Cloud 
+### Details of Overall 3D Point Cloud 
 <img src = "img/report/ID_S1_EX2_DETAIL.png?raw=true" width=700 />
 
 * Lidar is located in the lower right of the image
