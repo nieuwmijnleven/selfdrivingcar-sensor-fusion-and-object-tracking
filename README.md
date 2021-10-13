@@ -57,4 +57,5 @@ $> python loop_over_dataset_ID_S4.py
 <img src = "img/report/ID_S4-EX3.png?raw=true" width=800 />
 
 #### (case 2) configs_det.use_labels_as_objects = True
-* 
+* precision = 1.0, recall = 1.0
+<img src = "img/report/ID_S4-EX3-2.png?raw=true" width=800 />
