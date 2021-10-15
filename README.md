@@ -59,12 +59,33 @@ $> python loop_over_dataset_STEP4.py
 ## Writeup Instructions
 
 ### 1. Write a short recap of the four tracking steps and what you implemented there (EKF, track management, data association, camera-lidar sensor fusion). 
-* (1) Extended Kalman Filter
- * We implemented the functions of system matrix F, process noise covariance Q, prediction, and update states
- * We introduced nonlinear function h(x) and applied to our kalman filter successfully.
-* Track Management
-* Data Association
-* Camera-Lidar Sensor Fusion
+#### (1) Extended Kalman Filter
+* We implemented the functions of system matrix F, process noise covariance Q, prediction, and update states
+* We introduced nonlinear function h(x) and applied to our kalman filter successfully.
+
+#### (2) Track Management
+* We introduce some confident values to assign them to a track
+  * Track score
+  * Track state
+    * confirmed, tentative, initialized
+* We implemented the following functions
+  * Initialization of new tracks 
+  * Update of the state and score of a track
+  * Deletion of old tracks
+
+#### (3) Data Association
+* We implemented the following functions
+  * Simple Nearest Neighbor(SNN)
+  * Mahalanobis Distance(MHD)
+  * Gating
+
+#### (4) Camera-Lidar Sensor Fusion
+* We implemented the following functions
+  * Transformation from sensor coordinates to vehicle coordinates
+  * Transformation from vehicle coordinates to sensor coordinates
+  * Projection of a 3d point or a 6d state vector to 2d image space
+    * nonlinear measurement function
+  * Extended Kalman Filter 
 
 ### (2) Which results did you achieve? Which part of the project was most difficult for you to complete, and why?
 ### (3) Do you see any benefits in camera-lidar fusion compared to lidar-only tracking (in theory and in your concrete results)?
