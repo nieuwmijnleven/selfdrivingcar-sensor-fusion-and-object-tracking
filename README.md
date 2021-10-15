@@ -56,7 +56,7 @@ $> python loop_over_dataset_STEP4.py
  <img src = "img/report/step4.png?raw=true" width=1000 />
 </kbd>
 
-## Writeup Instructions
+## Details of this project
 
 ### 1. Write a short recap of the four tracking steps and what you implemented there (EKF, track management, data association, camera-lidar sensor fusion). 
 #### (1) Extended Kalman Filter
