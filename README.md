@@ -58,8 +58,10 @@ $> python loop_over_dataset_STEP4.py
 
 ## Writeup Instructions
 
-### (1) Write a short recap of the four tracking steps and what you implemented there (EKF, track management, data association, camera-lidar sensor fusion). 
-* Extended Kalman Filter
+### 1. Write a short recap of the four tracking steps and what you implemented there (EKF, track management, data association, camera-lidar sensor fusion). 
+* (1) Extended Kalman Filter
+ * We implemented the functions of system matrix F, process noise covariance Q, prediction, and update states
+ * We introduced nonlinear function h(x) and applied to our kalman filter successfully.
 * Track Management
 * Data Association
 * Camera-Lidar Sensor Fusion
