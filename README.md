@@ -56,4 +56,11 @@ $> python loop_over_dataset_STEP4.py
  <img src = "img/report/step4.png?raw=true" width=1000 />
 </kbd>
 
+## Writeup Instructions
+
+### (1) Write a short recap of the four tracking steps and what you implemented there (EKF, track management, data association, camera-lidar sensor fusion). 
+### (2) Which results did you achieve? Which part of the project was most difficult for you to complete, and why?
+### (3) Do you see any benefits in camera-lidar fusion compared to lidar-only tracking (in theory and in your concrete results)?
+### (4) Which challenges will a sensor fusion system face in real-life scenarios? Did you see any of these challenges in the project?
+### (5) Can you think of ways to improve your tracking results in the future?
 
