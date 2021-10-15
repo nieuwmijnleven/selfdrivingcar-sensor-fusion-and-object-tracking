@@ -20,7 +20,7 @@ import sys
 PACKAGE_PARENT = '..'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
 sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
-import misc.params as params 
+import misc.params as params
 
 class Track:
     '''Track class with state, covariance, id, score'''
@@ -35,20 +35,49 @@ class Track:
         # - initialize track state and track score with appropriate values
         ############
 
-        self.x = np.matrix([[49.53980697],
-                        [ 3.41006279],
-                        [ 0.91790581],
-                        [ 0.        ],
-                        [ 0.        ],
-                        [ 0.        ]])
-        self.P = np.matrix([[9.0e-02, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00],
-                        [0.0e+00, 9.0e-02, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00],
-                        [0.0e+00, 0.0e+00, 6.4e-03, 0.0e+00, 0.0e+00, 0.0e+00],
-                        [0.0e+00, 0.0e+00, 0.0e+00, 2.5e+03, 0.0e+00, 0.0e+00],
-                        [0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 2.5e+03, 0.0e+00],
-                        [0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 2.5e+01]])
-        self.state = 'confirmed'
-        self.score = 0
+        pos_sens = np.ones((4, 1))  # homogeneous coordinates
+        pos_sens[0:3] = meas.z[0:3]
+        pos_veh = meas.sensor.sens_to_veh * pos_sens
+
+        self.x = np.zeros((params.dim_state, 1))
+        self.x[0:3] = pos_veh[0:3]
+
+        # set up position estimation error covariance
+        M_rot = meas.sensor.sens_to_veh[0:3, 0:3]
+        P_pos = M_rot * meas.R * np.transpose(M_rot)
+
+        # set up velocity estimation error covariance
+        sigma_p44 = params.sigma_p44  # initial setting for estimation error covariance P entry for vx
+        sigma_p55 = params.sigma_p55  # initial setting for estimation error covariance P entry for vy
+        sigma_p66 = params.sigma_p66  # initial setting for estimation error covariance P entry for vz
+        P_vel = np.matrix([[sigma_p44 ** 2, 0, 0],
+                           [0, sigma_p55 ** 2, 0],
+                           [0, 0, sigma_p66 ** 2]])
+
+        # overall covariance initialization
+        self.P = np.zeros((params.dim_state, params.dim_state))
+        self.P[0:3, 0:3] = P_pos
+        self.P[3:6, 3:6] = P_vel
+
+        self.state = 'initialized'
+        self.score = 1./params.window
+
+        # self.x = np.matrix([[49.53980697],
+        #                 [ 3.41006279],
+        #                 [ 0.91790581],
+        #                 [ 0.        ],
+        #                 [ 0.        ],
+        #                 [ 0.        ]])
+
+        # self.P = np.matrix([[9.0e-02, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00],
+        #                 [0.0e+00, 9.0e-02, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00],
+        #                 [0.0e+00, 0.0e+00, 6.4e-03, 0.0e+00, 0.0e+00, 0.0e+00],
+        #                 [0.0e+00, 0.0e+00, 0.0e+00, 2.5e+03, 0.0e+00, 0.0e+00],
+        #                 [0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 2.5e+03, 0.0e+00],
+        #                 [0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 2.5e+01]])
+
+        # self.state = 'confirmed'
+        # self.score = 0
         
         ############
         # END student code
@@ -107,9 +136,13 @@ class Trackmanagement:
             if meas_list: # if not empty
                 if meas_list[0].sensor.in_fov(track.x):
                     # your code goes here
-                    pass 
+                    track.score -= 0.1
 
-        # delete old tracks   
+        # delete old tracks
+        for track in self.track_list:
+            if track.state in ['initialized', 'tentative']:
+                if (track.P[0,0] > params.max_P) or (track.P[1,1] > params.max_P) or (track.score < 0.1):
+                    self.delete_track(track)
 
         ############
         # END student code
@@ -139,9 +172,11 @@ class Trackmanagement:
         # - increase track score
         # - set track state to 'tentative' or 'confirmed'
         ############
-
-        pass
-        
+        track.score += 0.1
+        if track.score >= params.confirmed_threshold:
+            track.state = 'confirmed'
+        else:
+            track.state = 'tentative'
         ############
         # END student code
         ############ 
