@@ -4,8 +4,15 @@
 ```
 $> python loop_over_dataset_STEP1.py
 ```
-<img src = "img/report/step1-animation.gif?raw=true" width=1000 />
-<img src = "img/report/step1.png?raw=true" width=1000 />
+### Animation
+<kbd>
+ <img src = "img/report/step1_animation.gif?raw=true" width=1000 />
+</kbd>
+
+### Experimental Results
+<kbd>
+ <img src = "img/report/step1.png?raw=true" width=1000 />
+<kbd>
 
 ## ID_S1_EX2
 ```
