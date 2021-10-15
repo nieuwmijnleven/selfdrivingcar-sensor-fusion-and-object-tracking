@@ -61,7 +61,7 @@ $> cd ./sensor-fusion-and-object-tracking
 ```
 download the pretrained model of darknet from https://drive.google.com/file/d/1Pqx7sShlqKSGmvshTYbNDcUEYyZwfn3A/view?usp=sharing
 unzip the file into ./sensor-fusion-and-object-tracking/tools/objdet_models/darknet/pretrained
-download the pretrained model of darknet from https://drive.google.com/file/d/1RcEfUIF1pzDZco8PJkZ10OL-wLL2usEj/view?usp=sharing
+download the pretrained model of fpn_resnet from https://drive.google.com/file/d/1RcEfUIF1pzDZco8PJkZ10OL-wLL2usEj/view?usp=sharing
 unzip the file into ./sensor-fusion-and-object-tracking/tools/objdet_models/fpn_resnet/pretrained
 ```
 
