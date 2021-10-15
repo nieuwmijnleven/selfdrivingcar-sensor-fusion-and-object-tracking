@@ -1,11 +1,11 @@
-# Mid-Term Project: 3D Object Detection
+# Final Project: Sensor Fusion and Object Tracking
 
-## ID_S1_EX1
+## STEP1
 ```
-$> python loop_over_dataset_ID_S1_EX1.py
+$> python loop_over_dataset_STEP1.py
 ```
-<img src = "img/report/ID_S1_EX1.png?raw=true" width=1000 />
-<img src = "img/report/ID_S1_EX1-2.png?raw=true" width=1000 />
+<img src = "img/report/step1-animation.gif?raw=true" width=1000 />
+<img src = "img/report/step1.png?raw=true" width=1000 />
 
 ## ID_S1_EX2
 ```
