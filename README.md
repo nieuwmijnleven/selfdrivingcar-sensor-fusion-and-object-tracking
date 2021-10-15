@@ -89,7 +89,7 @@ $> python loop_over_dataset_STEP4.py
 
 ### 2. Which results did you achieve? 
 * We made an object tracking system using the extended kalman filter and sensor fusion
-  * Our object tracking system based on sensor fusion shows better precision than an object tracking system using lidar only   
+  * Our object tracking system based on sensor fusion shows better performance than an object tracking system using lidar only   
 
 ### 3. Which part of the project was most difficult for you to complete, and why?
 * It is challenging to understand and implement the Extended Kalman Filter. Some mathematical knowledge are need for understanding. For example, linear algebra, probabilities, statistics and differential equations. I managed to understand the Extended Kalman Filter and implement it.
