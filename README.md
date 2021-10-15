@@ -72,7 +72,7 @@ unzip the file into ./sensor-fusion-and-object-tracking/results
 ```
 
 ## Implementations
-## STEP1
+### STEP1
 ```
 $> python loop_over_dataset_STEP1.py
 ```
@@ -86,7 +86,7 @@ $> python loop_over_dataset_STEP1.py
  <img src = "img/report/step1.png?raw=true" width=1000 />
 </kbd>
 
-## STEP2
+### STEP2
 ```
 $> python loop_over_dataset_STEP2.py
 ```
@@ -100,7 +100,7 @@ $> python loop_over_dataset_STEP2.py
  <img src = "img/report/step2.png?raw=true" width=1000 />
 </kbd>
 
-## STEP3
+### STEP3
 ```
 $> python loop_over_dataset_STEP3.py
 ```
@@ -114,7 +114,7 @@ $> python loop_over_dataset_STEP3.py
  <img src = "img/report/step3.png?raw=true" width=1000 />
 </kbd>
 
-## STEP4
+### STEP4
 ```
 $> python loop_over_dataset_STEP4.py
 ```
