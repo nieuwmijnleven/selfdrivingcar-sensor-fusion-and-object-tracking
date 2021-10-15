@@ -25,7 +25,7 @@ from student.measurements import Sensor
 class Filter:
     '''Kalman filter class'''
     def __init__(self):
-        self.sensor = Sensor(name='lidar', calib=None)
+        pass
 
     def F(self):
         ############
@@ -86,7 +86,7 @@ class Filter:
         # TODO Step 1: update state x and covariance P with associated measurement, save x and P in track
         ############
         # update state and covariance with associated measurement
-        H = self.sensor.get_H(track.x)  # measurement matrix
+        H = meas.sensor.get_H(track.x)  # measurement matrix
         gamma = self.gamma(track, meas) # residual
         S = self.S(track, meas, H)  # covariance of residual
         K = track.P * H.transpose() * np.linalg.inv(S)  # Kalman gain
@@ -104,7 +104,7 @@ class Filter:
         ############
         # TODO Step 1: calculate and return residual gamma
         ############
-        return meas.z - self.sensor.get_hx(track.x)
+        return meas.z - meas.sensor.get_hx(track.x)
         
         ############
         # END student code
