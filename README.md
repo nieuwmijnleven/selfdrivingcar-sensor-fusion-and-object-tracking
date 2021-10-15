@@ -4,21 +4,32 @@
 ```
 $> python loop_over_dataset_STEP1.py
 ```
-### Animation
+### 1. Animation
 <kbd>
  <img src = "img/report/step1_animation.gif?raw=true" width=1000 />
 </kbd>
 
-### Experimental Results
+### 2. Experimental Results
 <kbd>
  <img src = "img/report/step1.png?raw=true" width=1000 />
-<kbd>
+</kbd>
 
-## ID_S1_EX2
+## STEP2
 ```
-$> python loop_over_dataset_ID_S1_EX2.py
+$> python loop_over_dataset_STEP2.py
 ```
-### 1. Overall 3D Point Cloud
+### 1. Animation
+<kbd>
+ <img src = "img/report/step2_animation.gif?raw=true" width=1000 />
+</kbd>
+
+### 2. Experimental Results
+<kbd>
+ <img src = "img/report/step2.png?raw=true" width=1000 />
+</kbd>
+
+
+### 1. Animation
 <img src = "img/report/ID_S1_EX2.png?raw=true" width=700 />
 
 ### 2. Details of Overall 3D Point Cloud 
