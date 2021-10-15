@@ -4,7 +4,7 @@
 ```
 $> python loop_over_dataset_STEP1.py
 ```
-### (1) Animation
+### (1) Visualization
 <kbd>
  <img src = "img/report/step1_animation.gif?raw=true" width=1000 />
 </kbd>
@@ -18,7 +18,7 @@ $> python loop_over_dataset_STEP1.py
 ```
 $> python loop_over_dataset_STEP2.py
 ```
-### (1) Animation
+### (1) Visualization
 <kbd>
  <img src = "img/report/step2_animation.gif?raw=true" width=1000 />
 </kbd>
@@ -32,7 +32,7 @@ $> python loop_over_dataset_STEP2.py
 ```
 $> python loop_over_dataset_STEP3.py
 ```
-### (1) Animation
+### (1) Visualization
 <kbd>
  <img src = "img/report/step3_animation.gif?raw=true" width=1000 />
 </kbd>
@@ -46,7 +46,7 @@ $> python loop_over_dataset_STEP3.py
 ```
 $> python loop_over_dataset_STEP4.py
 ```
-### (1) Animation
+### (1) Visualization
 <kbd>
  <img src = "img/report/step4_animation.gif?raw=true" width=1000 />
 </kbd>
